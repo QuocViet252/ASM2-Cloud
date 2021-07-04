@@ -36,28 +36,30 @@
 
 
     </div>
-    @foreach($product as $value)
+
     <div class="form-register">
         <h1>Update Product</h1>
-        <img src="{{asset('project_asset/images/rolex3.jpg')}}">
-        <form action="{{url('product/update/.$value->id}}" method="post" enctype="multipart/form-data">
+
+
+        <form action="{{url('product/update/'.$edit_product->id)}}" method="post" enctype="multipart/form-data">
             @csrf
+
             <label>Name Product</label>
-            <input type="text" value="{{$value->name}}" name="name" required>
+            <input type="text" value="{{$edit_product->name}}" name="name" required>
             <label>Price</label>
-            <input type="text" name="{{$value->price}}" required>
+            <input type="text" value="{{$edit_product->price}}" name="price" required>
             <label>Size</label>
-            <input type="text" name="{{$value->size}}">
+            <input type="text" value="{{$edit_product->size}}" name="size" required>
             <label>QTY</label>
-            <input type="text" name="{{$value->qty}}">
+            <input type="text" value="{{$edit_product->qty}}" name="qty">
             <label>Avatar</label>
-            <img src="{{asset('project_asset/images/.$value->images')}}">
+            <img style="margin-right:50px" src="{{asset('project_asset/images/'.$edit_product->images)}}">
+            <input type="file" name="avatar">
             <button class="btn-log" type="submit">Create Product</button>
         </form>
 
-
-
-
     </div>
-    @endforech
-    @endsection
+
+</div>
+
+@endsection

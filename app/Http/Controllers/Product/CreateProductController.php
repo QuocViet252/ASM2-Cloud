@@ -85,8 +85,10 @@ class CreateProductController extends Controller
      */
     public function edit($id)
     {
-        $product = MyProduct::find($id);
-        return view('web.edit-product',compact('product'));
+        $edit_product = MyProduct::find($id);
+        return view('web.edit-product',compact('edit_product'));
+        
+       
     }
 
     /**
@@ -111,14 +113,11 @@ class CreateProductController extends Controller
             // var_dump($fileImage-getClientOriginalName());
             
         }
-        else{
-            return redirect('product/list')->with('success',__('You dont have images product'));
-        }
         if($tbl_product->save()){
             if(!empty($fileImage)){
                 $fileImage->move('project_asset/images/',$fileImage->getClientOriginalName());
             }
-            return redirect('product/list')->with('success',__('You have successfully created the product'));
+            return redirect('product/list')->with('success',__('You have successfully update the product'));
         }
     }
 
