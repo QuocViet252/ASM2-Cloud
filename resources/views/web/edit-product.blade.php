@@ -51,7 +51,7 @@
             <label>QTY</label>
             <input type="text" name="{{$value->qty}}">
             <label>Avatar</label>
-            <img src="{{asset('project_asset/images/{{$value->images}}')}}">
+            <img src="{{asset('project_asset/images/.$value->image}')}}">
             <button class="btn-log" type="submit">Create Product</button>
         </form>
 
