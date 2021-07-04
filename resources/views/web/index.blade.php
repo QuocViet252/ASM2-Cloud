@@ -14,41 +14,15 @@
         <div class="slider-cart">
 
             <div class="slides-cart">
+                @foreach($product as $value)
                 <figure>
-                    <img src="{{asset('project_asset/images/rolex.jpg')}}">
-                    <figcaption style="color: white">Rolex</figcaption>
-                    <figcaption style="color: white">$45</figcaption>
+                    <img src="{{asset('project_asset/images/'.$value->images)}}">
+                    <figcaption style="color: white">{{$value->name}}</figcaption>
+                    <figcaption style="color: white">${{$value->price}}</figcaption>
                     <a class="addCart" href="#">Add To Cart</a>
 
                 </figure>
-                <figure>
-                    <img src="{{asset('project_asset/images/rolex.jpg')}}">
-                    <figcaption style="color: white">Rolex</figcaption>
-                    <figcaption style="color: white">$45</figcaption>
-                    <a class="addCart" href="#">Add To Cart</a>
-
-                </figure>
-                <figure>
-                    <img src="{{asset('project_asset/images/rolex.jpg')}}">
-                    <figcaption style="color: white">Rolex</figcaption>
-                    <figcaption style="color: white">$45</figcaption>
-                    <a class="addCart" href="#">Add To Cart</a>
-
-                </figure>
-                <figure>
-                    <img src="{{asset('project_asset/images/rolex.jpg')}}">
-                    <figcaption style="color: white">Rolex</figcaption>
-                    <figcaption style="color: white">$45</figcaption>
-                    <a class="addCart" href="#">Add To Cart</a>
-
-                </figure>
-                <figure>
-                    <img src="{{asset('project_asset/images/rolex.jpg')}}">
-                    <figcaption style="color: white">Rolex</figcaption>
-                    <figcaption style="color: white">$45</figcaption>
-                    <a class="addCart" href="#">Add To Cart</a>
-
-                </figure>
+                @endforeach
 
             </div>
         </div>
