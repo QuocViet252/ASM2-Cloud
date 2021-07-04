@@ -85,7 +85,28 @@ class CreateProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tbl_product = MyProduct::find($id);
+        
+        $tbl_product->name = $request->name;
+        $tbl_product->id_user = Auth::user()->id;
+        $tbl_product->price = $request->price;
+        $tbl_product->size = $request->size;
+        $tbl_product->qty = $request->qty;
+        $fileImage = $request->avatar;
+        if(!empty($fileImage)){
+            $tbl_product->images = $fileImage->getClientOriginalName();
+            // var_dump($fileImage-getClientOriginalName());
+            
+        }
+        else{
+            return redirect('product/list')->with('success',__('You dont have images product'));
+        }
+        if($tbl_product->save()){
+            if(!empty($fileImage)){
+                $fileImage->move('project_asset/images/',$fileImage->getClientOriginalName());
+            }
+            return redirect('product/list')->with('success',__('You have successfully created the product'));
+        }
     }
 
     /**
@@ -108,6 +129,11 @@ class CreateProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = MyProduct::find($id);
+
+        if($product->delete()){
+            return redirect('product/list')->with('success',__('You have successfully created the product'));
+        }
+        
     }
 }

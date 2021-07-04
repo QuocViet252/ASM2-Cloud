@@ -29,3 +29,5 @@ Route::get('/profile','Profile\ProfileController@index');
 Route::post('/profile/update','Profile\ProfileController@update');
 
 Route::get('/list/cart','Cart\CartController@index');
+
+Route::get('product/delete/{id}','Product\CreateProductController@destroy');

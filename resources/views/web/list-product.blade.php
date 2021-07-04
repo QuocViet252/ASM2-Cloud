@@ -45,9 +45,9 @@
             <td>{{$value->size}}</td>
             <td>{{$value->qty}}</td>
             <td>
-                <a href="{{url('product/delete'.$value->id)}}"><i class="material-icons">delete</i></a>
+                <a href="{{url('product/delete/'.$value->id)}}"><i class="material-icons">delete</i></a>
 
-                <a href="{{url('product/edit'.$value->id)}}"><i class="material-icons">edit</i></a>
+                <a href="{{url('product/edit/'.$value->id)}}"><i class="material-icons">edit</i></a>
 
 
             </td>
