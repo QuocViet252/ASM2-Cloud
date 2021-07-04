@@ -31,3 +31,5 @@ Route::post('/profile/update','Profile\ProfileController@update');
 Route::get('/list/cart','Cart\CartController@index');
 
 Route::get('product/delete/{id}','Product\CreateProductController@destroy');
+Route::get('product/edit/{id}','Product\CreateProductController@edit');
+Route::post('product/update/{id}','Product\CreateProductController@update');
