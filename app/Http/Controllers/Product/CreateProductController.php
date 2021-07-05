@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 class CreateProductController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
