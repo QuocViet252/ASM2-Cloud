@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\MyProduct;
 use App\User;
 use Auth;
+use GuzzleHttp\Client;
+
 class CreateProductController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +19,14 @@ class CreateProductController extends Controller
      */
     public function index()
     {
+        // $client = new GuzzleHttp\Client();
+        // $res = $client->request('GET', 'https://api.github.com/user', [
+        //     'auth' => ['user', 'pass']
+        // ]);
+
+        // echo $res->getBody();
         $product = MyProduct::all();
-        return view('web.list-product',compact('product'));
+        return view('web.list-product', compact('product'));
     }
 
     /**
@@ -26,7 +34,8 @@ class CreateProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCreate(){
+    public function getCreate()
+    {
         return view('web.create-product');
     }
     public function postCreate(Request $request)
@@ -39,21 +48,19 @@ class CreateProductController extends Controller
         $tbl_product->size = $request->size;
         $tbl_product->qty = $request->qty;
         $fileImage = $request->avatar;
-        if(!empty($fileImage)){
+        if (!empty($fileImage)) {
             $tbl_product->images = $fileImage->getClientOriginalName();
             // var_dump($fileImage-getClientOriginalName());
-            
+
+        } else {
+            return redirect('product/list')->with('success', __('You dont have images product'));
         }
-        else{
-            return redirect('product/list')->with('success',__('You dont have images product'));
-        }
-        if($tbl_product->save()){
-            if(!empty($fileImage)){
-                $fileImage->move('project_asset/images/',$fileImage->getClientOriginalName());
+        if ($tbl_product->save()) {
+            if (!empty($fileImage)) {
+                $fileImage->move('project_asset/images/', $fileImage->getClientOriginalName());
             }
-            return redirect('product/list')->with('success',__('You have successfully created the product'));
+            return redirect('product/list')->with('success', __('You have successfully created the product'));
         }
-        
     }
 
     /**
@@ -87,9 +94,7 @@ class CreateProductController extends Controller
     public function edit($id)
     {
         $edit_product = MyProduct::find($id);
-        return view('web.edit-product',compact('edit_product'));
-        
-       
+        return view('web.edit-product', compact('edit_product'));
     }
 
     /**
@@ -109,16 +114,16 @@ class CreateProductController extends Controller
         $tbl_product->size = $request->size;
         $tbl_product->qty = $request->qty;
         $fileImage = $request->avatar;
-        if(!empty($fileImage)){
+        if (!empty($fileImage)) {
             $tbl_product->images = $fileImage->getClientOriginalName();
             // var_dump($fileImage-getClientOriginalName());
-            
+
         }
-        if($tbl_product->save()){
-            if(!empty($fileImage)){
-                $fileImage->move('project_asset/images/',$fileImage->getClientOriginalName());
+        if ($tbl_product->save()) {
+            if (!empty($fileImage)) {
+                $fileImage->move('project_asset/images/', $fileImage->getClientOriginalName());
             }
-            return redirect('product/list')->with('success',__('You have successfully update the product'));
+            return redirect('product/list')->with('success', __('You have successfully update the product'));
         }
     }
 
@@ -132,9 +137,8 @@ class CreateProductController extends Controller
     {
         $product = MyProduct::find($id);
 
-        if($product->delete()){
-            return redirect('product/list')->with('success',__('You have successfully delete the product'));
+        if ($product->delete()) {
+            return redirect('product/list')->with('success', __('You have successfully delete the product'));
         }
-        
     }
 }

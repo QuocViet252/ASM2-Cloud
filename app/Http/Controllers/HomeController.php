@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\MyProduct;
+use GuzzleHttp\Client;
+
 class HomeController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    
+
 
     /**
      * Show the application dashboard.
@@ -20,7 +22,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $product = MyProduct::all();
-        return view('web.index',compact('product'));
+        // $product = MyProduct::all();
+        // return view('web.index',compact('product'));
+        $client = new Client();
+        $res = $client->request('GET', 'https://api.github.com/user', [
+            'auth' => ['user', 'pass']
+        ]);
     }
 }

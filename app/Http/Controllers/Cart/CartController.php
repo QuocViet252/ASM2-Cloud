@@ -14,6 +14,12 @@ class CartController extends Controller
      */
     public function index()
     {
+        dd(123);
+        $client = new GuzzleHttp\Client();
+        $res = $client->request('GET', 'https://api.github.com/user', [
+            'auth' => ['user', 'pass']
+        ]);
+
         return view('web.cart');
     }
 
